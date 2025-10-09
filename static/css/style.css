@@ -1,0 +1,575 @@
+/* css/style.css
+Mobile-first responsive styles for the portfolio
+
+* Uses CSS variables for colors in :root
+* Flexbox for header; Grid for projects
+* Media queries at 600px and 900px
+* Basic reset included
+  */
+
+/* =========================
+Reset / Normalize (minimal)
+========================= */
+*,
+*::before,
+*::after {
+box-sizing: border-box;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, textarea, input, button {
+margin: 0;
+padding: 0;
+border: 0;
+font: inherit;
+vertical-align: baseline;
+}
+
+/* Improve text rendering */
+html {
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+line-height: 1.5;
+font-size: 16px; /* base size for mobile */
+background-color: var(--bg);
+color: var(--text);
+}
+
+/* =========================
+CSS Variables - neutral palette
+Adjust these to change the theme.
+========================= */
+:root {
+--bg: #f5f4f2;            /* light beige background */
+--card: #ffffff;          /* white card backgrounds */
+--muted: #9aa0a6;         /* muted gray for secondary text */
+--text: #22282c;          /* primary text (dark) */
+--accent: #000000;        /* muted blue accent */
+--accent-2: #000000;      /* warm beige accent */
+--focus: #3b6b82;         /* focus ring color */
+--shadow: rgba(18,24,28,0.06);
+--radius: 10px;
+--max-width: 1100px;
+}
+
+/* =========================
+Utility & layout
+========================= */
+.site-wrapper {
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: stretch;
+}
+
+/* Center content and apply horizontal padding */
+.site-main,
+.site-header,
+.site-footer {
+width: 100%;
+max-width: var(--max-width);
+margin: 0 auto;
+padding: 1rem;
+}
+
+/* Focus outline for accessibility */
+:focus {
+outline: 3px solid var(--focus);
+outline-offset: 2px;
+}
+
+/* =========================
+Header (Flexbox)
+========================= */
+.site-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 1rem;
+padding-top: 0.5rem;
+padding-bottom: 0.5rem;
+}
+
+/* LEFT: logo + name */
+.header-left {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+}
+
+/* Logo sizing - scalable */
+.logo {
+width: 44px;
+height: 44px;
+object-fit: contain;
+border-radius: 8px;
+background: var(--card);
+box-shadow: 0 2px 6px var(--shadow);
+}
+
+/* Site title styling - keep it small on mobile */
+.site-title {
+font-size: 1rem;
+font-weight: 700;
+letter-spacing: 0.2px;
+}
+
+/* NAVIGATION */
+.header-nav {
+display: flex;
+align-items: center;
+}
+
+/* Toggle button (hidden on larger screens) */
+.nav-toggle {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+background: transparent;
+border: none;
+padding: 0.25rem;
+margin-right: 0.5rem;
+}
+
+/* Hamburger bars */
+.hamburger {
+display: inline-block;
+width: 28px;
+height: 20px;
+position: relative;
+}
+.hamburger .bar {
+display: block;
+height: 2px;
+width: 100%;
+background: var(--text);
+margin: 4px 0;
+border-radius: 2px;
+}
+
+/* Nav list (mobile-first: stacked when open) */
+.nav-list {
+list-style: none;
+display: none; /* hidden by default on mobile */
+gap: 1rem;
+background: transparent;
+}
+
+/* When nav is open (JS toggles .open on nav-list) */
+.nav-list.open {
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+position: absolute;
+top: 72px;
+right: 1rem;
+background: var(--card);
+padding: 0.75rem;
+border-radius: 8px;
+box-shadow: 0 8px 20px var(--shadow);
+min-width: 160px;
+}
+
+/* Nav links */
+.nav-link {
+display: inline-block;
+padding: 0.5rem 0.75rem;
+text-decoration: none;
+color: var(--text);
+font-weight: 600;
+border-radius: 6px;
+}
+
+/* Hover / focus states */
+.nav-link:hover,
+.nav-link:focus {
+background: linear-gradient(90deg, var(--accent), var(--accent-2));
+color: white;
+}
+
+/* =========================
+HERO
+========================= */
+.hero {
+display: grid;
+grid-template-columns: 1fr;
+gap: 1rem;
+align-items: center;
+padding: 1.25rem 0;
+}
+
+.hero-inner {
+max-width: 42rem;
+}
+
+.eyebrow {
+color: var(--muted);
+font-weight: 600;
+letter-spacing: 0.08em;
+font-size: 0.75rem;
+margin-bottom: 0.25rem;
+}
+
+.hero-title {
+font-size: 1.75rem;
+margin: 0.25rem 0;
+color: var(--text);
+}
+
+.hero-sub {
+color: var(--muted);
+margin-bottom: 0.75rem;
+}
+
+/* CTA button */
+.btn {
+display: inline-block;
+padding: 0.65rem 1rem;
+border-radius: 8px;
+border: 1px solid transparent;
+background: transparent;
+cursor: pointer;
+font-weight: 600;
+}
+
+.btn-primary {
+background: linear-gradient(90deg, var(--accent), var(--accent-2));
+color: white;
+box-shadow: 0 6px 18px var(--shadow);
+}
+
+.btn-ghost {
+background: transparent;
+color: var(--text);
+border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Hero visual container with image */
+.hero-visual {
+height: 160px;
+border-radius: var(--radius);
+box-shadow: 0 6px 18px var(--shadow);
+margin-top: 0.5rem;
+overflow: hidden; /* Ensures image fits within rounded corners */
+}
+
+.hero-visual .hero-image {
+width: 100%;
+height: 100%;
+object-fit: cover; /* Maintains aspect ratio while filling container */
+border-radius: var(--radius);
+}
+
+/* =========================
+About section
+========================= */
+.about {
+padding: 1rem 0;
+}
+
+.section-title {
+font-size: 1.1rem;
+margin-bottom: 0.75rem;
+color: var(--text);
+}
+
+.about-grid {
+display: grid;
+grid-template-columns: 1fr;
+gap: 1rem;
+}
+
+.bio p {
+color: var(--text);
+margin-bottom: 0.5rem;
+}
+
+.quick-facts {
+background: var(--card);
+padding: 0.75rem;
+border-radius: var(--radius);
+box-shadow: 0 6px 18px var(--shadow);
+}
+
+/* =========================
+Projects - CSS Grid
+========================= */
+.projects {
+padding: 1rem 0;
+}
+
+.projects-grid {
+display: grid;
+grid-template-columns: 1fr;
+gap: 1rem;
+}
+
+/* Project card */
+.project-card {
+background: var(--card);
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 8px 24px var(--shadow);
+display: flex;
+flex-direction: column;
+min-height: 220px;
+}
+
+.project-image {
+width: 100%;
+height: 140px;
+object-fit: cover;
+display: block;
+}
+
+/* Card content */
+.project-content {
+padding: 0.75rem;
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+flex: 1;
+}
+
+.project-title {
+font-size: 1rem;
+color: var(--text);
+}
+
+.project-desc {
+color: var(--muted);
+flex: 1;
+}
+
+.project-link {
+align-self: flex-start;
+text-decoration: none;
+padding: 0.4rem 0.6rem;
+border-radius: 8px;
+font-weight: 600;
+}
+
+/* Hover for the link */
+.project-link:hover,
+.project-link:focus {
+background: var(--accent);
+color: white;
+}
+
+/* =========================
+Contact form
+========================= */
+.contact {
+padding: 1rem 0 2rem;
+}
+
+.contact-form {
+background: var(--card);
+padding: 1rem;
+border-radius: var(--radius);
+box-shadow: 0 10px 30px var(--shadow);
+display: grid;
+gap: 0.75rem;
+}
+
+.form-row {
+display: flex;
+flex-direction: column;
+gap: 0.25rem;
+}
+
+label {
+font-size: 0.9rem;
+color: var(--text);
+font-weight: 600;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+padding: 0.6rem;
+border-radius: 8px;
+border: 1px solid rgba(0,0,0,0.06);
+background: #fff;
+font-size: 1rem;
+color: var(--text);
+}
+
+/* HTML5 validation state (native) - subtle */
+input:invalid,
+textarea:invalid {
+border-color: #d9534f;
+}
+
+/* Form action buttons row */
+.form-actions {
+display: flex;
+gap: 0.5rem;
+justify-content: flex-start;
+}
+
+/* =========================
+Footer
+========================= */
+.site-footer {
+padding: 1rem 0;
+margin-top: auto;
+}
+
+.footer-inner {
+display: flex;
+gap: 1rem;
+align-items: center;
+justify-content: space-between;
+color: var(--muted);
+font-size: 0.9rem;
+}
+
+/* Social links styling */
+.social a {
+text-decoration: none;
+margin-left: 0.75rem;
+color: var(--muted);
+font-weight: 600;
+}
+.social a:hover,
+.social a:focus {
+color: var(--text);
+}
+
+/* =========================
+Media Queries
+Breakpoints:
+- 600px: tablet
+- 900px: desktop
+Mobile-first approach
+========================= */
+
+/* Tablet and up */
+@media (min-width: 600px) {
+html { font-size: 16px; } /* keep base size */
+.nav-list {
+display: flex !important; /* show horizontal nav on tablet/desktop */
+position: static;
+flex-direction: row;
+background: transparent;
+box-shadow: none;
+padding: 0;
+gap: 1rem;
+}
+
+.nav-toggle { display: none; } /* hide hamburger on larger screens */
+
+.hero {
+grid-template-columns: 1fr 320px;
+align-items: center;
+}
+
+.hero-visual {
+height: 200px;
+}
+
+.hero-visual .hero-image {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.hero-visual .hero-image {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.about-grid {
+grid-template-columns: 1fr; /* Full width layout */
+}
+
+.projects-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+
+.project-image {
+height: 160px;
+}
+
+.site-title {
+font-size: 1.05rem;
+}
+}
+
+/* Desktop and up */
+@media (min-width: 900px) {
+html { font-size: 18px; } /* slightly larger type on desktop */
+
+.site-main, .site-header, .site-footer {
+padding-left: 2rem;
+padding-right: 2rem;
+}
+
+.hero-title {
+font-size: 2.25rem;
+}
+
+.projects-grid {
+grid-template-columns: repeat(3, 1fr);
+}
+
+.project-image {
+height: 180px;
+}
+
+.site-title {
+font-size: 1.12rem;
+}
+}
+
+/* Ensure color contrast for interactive elements (simple check) */
+.btn-primary,
+.nav-link:focus,
+.project-link:focus {
+color: #fff;
+}
+
+/* Small accessibility helper: hide elements visually but keep them for screen readers */
+.sr-only {
+position: absolute !important;
+height: 1px; width: 1px;
+overflow: hidden;
+clip: rect(1px, 1px, 1px, 1px);
+white-space: nowrap;
+}
+
+/* =========================
+Result Display for Projects
+========================= */
+.result-section {
+margin-top: 1.5rem;
+}
+
+.result-display {
+background: var(--card);
+padding: 1rem;
+border-radius: var(--radius);
+box-shadow: 0 6px 18px var(--shadow);
+border-left: 4px solid var(--accent);
+}
+
+.result-display p {
+font-size: 1.1rem;
+color: var(--text);
+margin: 0;
+font-family: 'Courier New', monospace;
+word-break: break-all;
+}
+
+::selection {
+background: var(--accent);
+color: #fff;
+}

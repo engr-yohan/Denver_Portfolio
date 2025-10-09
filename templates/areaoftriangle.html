@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang = "en'">
+<head>
+    <meta charset = "utf-8" />
+    <meta name = "viewport" content = "width=device-width, initial-scale = 1" />
+    <title>Area of Triangle - HappyLab</title>
+
+    <!-- Link to stylesheet -->
+    <link rel = "stylesheet" href = "{{url_for ('static', filename = 'css/style.css')}}" />
+
+</head>
+
+<body>
+    <div class = "site-wrapper">
+
+        <!-- HEADER -->
+        <header class = "site-header" role = "banner" aria-label = "Main header">
+            <!-- Left: Logo + Site name -->
+            <div class = "header-left">
+                <!-- Placeholder logo. Replace assets/logo.png with your logo -->
+                <img src = "{{url_for ('static', filename = 'assets/logo.jpg')}}" alt = "Logo" class = "logo" />
+                <h1 class = "site-title"> Denver Sayasaya </h1>
+            </div>
+
+            <!-- Right: Navigation -->
+            <nav class = "header-nav" role = "navigation" aria-label = "Primary navigation">
+                <!-- A simple accessible nav. On small screens the hamburger button appears (JS toggles .open) -->
+                <button class = nav-toggle aria-controls = "primary-menu" aria-expanded = "false" aria-label = "Toggle navigation">
+                    <!-- Simple hamburger icon (accessible) -->
+                    <span class = "hamburger">
+                        <span class = "bar"> </span>
+                        <span class = "bar"> </span>
+                        <span class = "bar"> </span>
+                    </span>
+                </button>
+                <ul id = "primary-menu" class = "nav-list">
+                    <li> <a href = "{{url_for('index')}}" class = "nav-link"> Home </a> </li>
+                    <li> <a href = "{{url_for('index')}}#about" class = "nav-link"> About </a> </li>
+                    <li> <a href = "{{url_for('index')}}#projects" class = "nav-link"> Projects </a> </li>
+                    <li> <a href = "{{url_for('index')}}#contact" class = "nav-link"> Contact </a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main id = "main" class = "site-main">
+            <!-- Project Section -->
+            <section class = "hero" aria-label = "Area of Triangle Project">
+                <div class = "hero-inner">
+                    <p class = "eyebrow">Project 3</p>
+                    <h2 class = "hero-title">Area of Triangle</h2>
+                    <p class = "hero-sub">Calculate the area of a triangle using the formula A = ½ × base × height</p>
+                </div>
+            </section>
+
+            <!-- Tool Section -->
+            <section class = "contact" aria-label = "Triangle Area Calculator">
+                <h3 class = "section-title">Calculate Triangle Area</h3>
+                <p>Enter the base and height of your triangle below and click calculate to find the area.</p>
+
+                <!-- Triangle Area Calculation Form -->
+                <form class = "contact-form" action = "{{url_for('areaoftriangle')}}" method = "post" novalidate>
+                    <div class = "form-row">
+                        <label for = "base">Enter base:</label>
+                        <input id = "base" name = "base" type = "number" step = "0.01" required placeholder = "e.g., 10" />
+                        <small style = "color: var(--muted); font-size: 0.85rem; margin-top: 0.25rem;">Enter the base length in any unit</small>
+                    </div>
+
+                    <div class = "form-row">
+                        <label for = "height">Enter height:</label>
+                        <input id = "height" name = "height" type = "number" step = "0.01" required placeholder = "e.g., 8" />
+                        <small style = "color: var(--muted); font-size: 0.85rem; margin-top: 0.25rem;">Enter the perpendicular height in the same unit as base</small>
+                    </div>
+
+                    <div class = "form-actions">
+                        <button type = "submit" class = "btn btn-primary">Calculate Area</button>
+                        <button type = "reset" class = "btn btn-ghost">Clear</button>
+                    </div>
+                </form>
+
+                <!-- Result Display -->
+                {% if result %}
+                <div class = "result-section">
+                    <h4 class = "section-title">Result:</h4>
+                    <div class = "result-display">
+                        {% if result == "Please enter valid numbers" %}
+                            <p style = "color: #d9534f;"><strong>{{ result }}</strong></p>
+                        {% else %}
+                            <p><strong>Area = {{ result }} square units</strong></p>
+                            <small style = "color: var(--muted); display: block; margin-top: 0.5rem;">
+                                Formula used: A = ½ × base × height = 0.5 × base × height
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Formula Explanation -->
+                <div class = "about" style = "margin-top: 2rem;">
+                    <h4 class = "section-title">About Triangle Area</h4>
+                    <div class = "bio">
+                        <p>
+                            The area of a triangle is calculated using the formula <strong>A = ½ × base × height</strong>, 
+                            where the base is any side of the triangle and the height is the perpendicular distance 
+                            from that base to the opposite vertex.
+                        </p>
+                        <p>
+                            This calculator uses the basic triangle area formula. Make sure to measure the height 
+                            perpendicular to the base, not along one of the other sides. Both measurements should 
+                            be in the same units for accurate results.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class = "site-footer" role = "contentinfo">
+            <div class = "footer-inner">
+                <p> &copy; <span id = "year"> </span> Happy Lab. All rights reserved. </p>
+
+                <!-- Social icons -->
+                <div class = "social">
+                    <a href = "#" aria-label = "Github profile"> GitHub </a>
+                    <a href = "#" aria-label = "LinkedIn profile"> LinkedIn </a>
+                    <a href = "#" aria-label = "Instagram profile"> Instagram </a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Link to optional JavaScript -->
+    <script src = "{{url_for('static', filename='js/main.js')}}" defer></script>
+
+</body>
+</html>

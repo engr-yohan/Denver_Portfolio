@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang = "en'">
+<head>
+    <meta charset = "utf-8" />
+    <meta name = "viewport" content = "width=device-width, initial-scale = 1" />
+    <title>HappyLab</title>
+
+    <!-- Link to sytlesheet -->
+    <link rel = "stylesheet" href = "{{url_for ('static', filename = 'css/style.css')}}" />
+
+</head>
+
+<!-- HEADER -->
+<header class = "site-header" role = "banner" aria-label = "Main header">
+    <!-- Left: Logo + Site name -->
+    <div class = "header-left">
+        <!-- Placeholder logo. Replace assets/logo.png with your logo -->
+        <img src = "{{url_for ('static', filename = 'assets/logo.jpg')}}" alt = "Logo" class = "logo" />
+        <h1 class = "site-title"> Denver Sayasaya </h1>
+    </div>
+
+    <!-- Right: Navigation -->
+    <nav class = "header-nav" role = "navigation" aria-label = "Primary navigation">
+        <!-- A simple accessible nav. On small screens the humbergur button appears (JS toggles .open) -->
+        <button class = nav-toggle aria-controls = "primary-menu" aria-expanded = "false" aria-label = "Toogle navigation">
+            <!-- Simple hamburger icon (accessible) -->
+            <span class = "hamburger">
+                <span class = "bar"> </span>
+                <span class = "bar"> </span>
+                <span class = "bar"> </span>
+            </span>
+        </button>
+        <ul id = "primary-menu" class = "nav-list">
+            <li> <a href = "#home" class = "nav-link"> Home </a> </li>
+            <li> <a href = "#about" class = "nav-link"> About </a> </li>
+            <li> <a href = "#projects" class = "nav-link"> Projects </a> </li>
+            <li> <a href = "#contact" class = "nav-link"> Contact </a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- MAIN CONTENT -->
+<main id = "main" class = "site-main">
+    <!-- Home Section -->
+    <section id = "home" class = "hero" aria-label = "Home">
+        <div class = "hero-inner">
+            <p class = "eyebrow">Hi, I'm</p>
+            <h2 class = "hero-title">Denver V. Sayasaya</h2>
+            <p class = "hero-sub">Bachelor of Science in Computer Engineering 2-3 • Data structures and Algorithms</p>
+            <a class = "btn btn-primary" href = "#projects">View Projects</a>
+        </div>
+        <!-- Hero Visual -->
+        <div class = "hero-visual">
+            <img src = "{{url_for ('static', filename = 'assets/Hero Visual.png')}}" alt = "Denver Sayasaya" class = "hero-image"/>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id = "about" class = "about" aria-label = "About me">
+        <h3 class = "section-title"> About </h3>
+        <div class = "about-grid">
+            <!-- Text bio -->
+            <div class = "bio">
+                <p>
+                    I'm a Computer Engineering student focusing on Big Data and practicing occupational
+                    safety in the workplace. I'm building a strong foundation to become a Data Engineer,
+                    with a specialization in environmental applications.
+                </p>
+                <p>
+                    Currently, I'm taking Introduction to Big Data as an elective, while also learning
+                    programming languages such as Javascript and strengthening my skills in Python and C++.
+                    I look forward to showcasing these skills in my future projects.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Project Section -->
+    <section id = "projects" class = "projects" aria-label = "Projects">
+        <h3 class = "section-title"> Projects </h3>
+
+        <div class = "projects-grid">
+
+            <!-- Project 1 -->
+            <article class = "project-card">
+                <img src = "{{url_for ('static', filename = 'assets/project-images/Project 1.png')}}" alt = "Project 1 screenshot" class = "project-image"/>
+                <div class = "project-content">
+                    <h4 class = "project-title">Upper Casing</h4>
+                    <p class = "project-desc"> A simple function that converts a string to uppercase. </p>
+                    <a class = "project-link" href = "{{url_for('touppercase')}}" aria-label = "View Project One">View →</a>
+                </div>
+            </article>
+
+            <article class = "project-card">
+                <img src = "{{url_for ('static', filename = 'assets/project-images/Project 2.png')}}" alt = "Project 2 screenshot" class = "project-image"/>
+                <div class = "project-content">
+                    <h4 class = "project-title">Area of Circle</h4>
+                    <p class = "project-desc"> A function that calculates the area of a circle given its radius. </p>
+                    <a class = "project-link" href = "{{url_for('areaofcircle')}}" aria-label = "View Project Two">View →</a>
+                </div>
+            </article>
+
+            <article class = "project-card">
+                <img src = "{{url_for ('static', filename = 'assets/project-images/Project 3.png')}}" alt = "Project 3 screenshots" class = "project-image" />
+                <div class = "project-content">
+                    <h4 class = "project-title">Area of Triangle</h4>
+                    <p class = "project-desc"> A function that calculates the area of a triangle given its base and height. </p>
+                    <a class = "project-link" href = "{{url_for('areaoftriangle')}}" aria-label = "View Project Three">View →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id = "contact" class = "contact" aria-label= "Contact me">
+        <h3 class = "section-title"> Contact </h3>
+        <p> If you'd like to discuss a project or opportunity, send a message below.</p>
+
+        <!-- Accessible contact form with HTML5 validation -->
+        <form class = "contact-form" action = "{{url_for ('contact')}}" method = "post" novalidate>
+            
+            <div class = "form-row">
+                <label for = "name"> Name </label>
+                <input id = "name" name = "name" type = "text" required placeholder = "Your name" />
+            </div>
+            
+            <div class = "form-row">
+                <label for = "email"> Email </label>
+                <input id = "email" name = "email" type = "email" required placeholder = "you@example.com" />
+            </div>
+
+            <div class = "form-row">
+                <label for = "message"> Message </label>
+                <textarea id = "message" name = "message" rows = "6" required placeholder = "Tell me about your project..."></textarea>
+            </div>
+
+            <div class = "form-actions">
+                <button type = "submit" class = "btn"> Send Message </button>
+                <button type = "reset" class = "btn btn-ghost"> Reset </button>
+            </div>
+        </form>
+    </section>
+</main>
+
+<!-- FOOTER -->
+<footer class = "site-footer" role = "contentinfo">
+    <div class = "footer-inner">
+        <p> &copy; <span id = "year"> </span> Happy Lab. All rights reserved. </p>
+
+        <!-- Social icons -->
+        <div class = "social">
+            <a href = "#" aria-label = "Github profile"> GitHub </a>
+            <a href = "#" aria-label = "LinkedIn profile"> LinkedIn </a>
+            <a href = "#" aria-label = "Instagram profile"> Instagram </a>
+        </div>
+    </div>
+</footer>
+    </div>
+    <script src = "{{url_for ('static', filename = 'js/main.js')}}" defer> </script>
+</body>
+</html>
