@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
+from infix_to_postfix_converter import infix_to_postfix
 import math
 
 app = Flask(__name__)
@@ -22,6 +23,32 @@ def touppercase():
         input_string = request.form.get('inputString', '')
         result = input_string.upper()
     return render_template('touppercase.html', result=result)
+
+
+@app.route('/infixtopostfix')
+def infix_page():
+    """Render the infix-to-postfix converter page."""
+    return render_template('infixtopostfixconverter.html')
+
+
+@app.route('/convert-postfix', methods=['POST'])
+def convert_postfix():
+    """API endpoint: accepts JSON or form data with 'expression' and returns postfix."""
+    data = {}
+    if request.is_json:
+        data = request.get_json()
+    else:
+        # fallback to form data
+        data = request.form.to_dict()
+
+    expr = data.get('expression', '')
+    result = ''
+    try:
+        result = infix_to_postfix(expr)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+    return jsonify({'postfix': result})
 
 @app.route('/areaofcircle', methods=['GET', 'POST'])
 def areaofcircle():
