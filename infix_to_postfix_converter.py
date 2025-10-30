@@ -89,16 +89,3 @@ def infix_to_postfix(expression: str) -> str:
 		output.append(top)
 
 	return ' '.join(output)
-
-
-if __name__ == '__main__':
-	examples = [
-		"A+B*C",
-		"(A+B)*C",
-		"A+B*C^D-E",
-		"( 12 + 24 ) * 3",
-		"a+b*c+d"
-	]
-	for ex in examples:
-		print(f"{ex}  ->  {infix_to_postfix(ex)}")
-
