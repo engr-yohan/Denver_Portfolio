@@ -1,19 +1,3 @@
-"""
-Infix to Postfix converter using the Shunting Yard algorithm.
-
-Provides a single function `infix_to_postfix(expression: str) -> str` which
-converts typical infix expressions (like "A+B*C" or "(A+B)*C") into a
-space-separated postfix string (like "A B C * +").
-
-This implementation supports:
-- operators: + - * / ^
-- parentheses: ( )
-- multi-character operands (variables or numbers), e.g. 12, var1
-- ignores extra spaces
-
-It's intentionally simple and suitable for classroom/portfolio use.
-"""
-
 from typing import List
 
 
@@ -61,11 +45,6 @@ def _tokenize(expr: str) -> List[str]:
 
 
 def infix_to_postfix(expression: str) -> str:
-	"""Convert an infix expression to postfix (RPN).
-
-	Returns a space-separated string of tokens in postfix order.
-	If input is empty or only spaces, returns empty string.
-	"""
 	if not expression or expression.strip() == '':
 		return ''
 
